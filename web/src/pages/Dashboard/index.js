@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Container,
   Header,
-  Title,
   Main,
   UploadBox,
   UploadText,
@@ -17,6 +16,7 @@ import api from "../../services/api";
 import { List } from "semantic-ui-react";
 import axios from "axios";
 import FileDownload from "js-file-download";
+import { Text } from "@chakra-ui/react";
 
 export default function Dashboard() {
   const [userdata, setUser] = useState({});
@@ -59,9 +59,6 @@ export default function Dashboard() {
   }
 
   const downloadFile = async (fileUrl, namefile) => {
-    // Get the file name
-
-    // The path of the downloaded file on our machine
     try {
       const response = await axios({
         method: "GET",
@@ -102,7 +99,9 @@ export default function Dashboard() {
   return (
     <Container>
       <Header>
-        <Title>{userdata.name} - Dashboard</Title>
+        <Text fontSize="2rem" fontWeight="bold">
+          {userdata.name} - Dashboard
+        </Text>
       </Header>
       <Main>
         <UploadBox onSubmit={handleSubmit} enctype="multipart/form-data">
@@ -179,7 +178,7 @@ export default function Dashboard() {
             {types.map((item) => (
               <List.Item key={item.id}>
                 <List.Content>
-                  <List.Header href={`/dashboard/${item.name}`} as="a">
+                  <List.Header href={`/dashboard/gestion/${item.name}`} as="a">
                     {item.name}
                   </List.Header>
                 </List.Content>

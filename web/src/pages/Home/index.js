@@ -25,7 +25,7 @@ export default function Home({ history }) {
         },
       });
       localStorage.setItem("jwt", response.data.token);
-      history.push("/dashboard");
+      history.push("/welcome");
     } catch (err) {
       setErro(true);
       setTimeout(() => {

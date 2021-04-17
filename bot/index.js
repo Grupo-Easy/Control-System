@@ -96,10 +96,21 @@ bot.on("message", async (msg) => {
 });
 
 server.get("/send", async (req, res) => {
-  const { id, msg } = req.params;
-  await bot.sendMessage(id, msg);
-  await SaveMessage("01", msg);
-  res.send("/");
+  const { id, message, key } = req.query;
+  console.log(req.query);
+  if (key !== process.env.KEY) {
+    console.log(key);
+    console.log(process.env.KEY);
+    return res.status(401).send("");
+  }
+  try {
+    await bot.sendMessage(id, message);
+    await SaveMessage("01", message);
+    return res.send("");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err);
+  }
 });
 
 server.listen(3001, () => {

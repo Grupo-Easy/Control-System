@@ -32,6 +32,8 @@ export const LoginBox = styled.div`
 
 export const LoginTitle = styled.h1`
   text-transform: uppercase;
+  font-weight: bold;
+  font-size: 2.75rem;
 `;
 
 export const LoginContainer = styled.div`

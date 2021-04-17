@@ -1,6 +1,7 @@
 "use strict";
 
 const Client = use("App/Models/Telegram");
+const axios = require("axios").default;
 
 class TelegramController {
   async index({ response, auth }) {
@@ -41,7 +42,28 @@ class TelegramController {
     }
   }
 
-  async show() {}
+  async send({ response, request, auth }) {
+    const data = request.only(["id", "message"]);
+    const user = await auth.getUser();
+
+    if (user.role !== "Admin") {
+      return response.status(401).send("");
+    }
+
+    try {
+      const result = await axios.get("http://localhost:3001/send", {
+        params: {
+          message: data.message,
+          key: process.env.APP_KEY,
+          id: data.id,
+        },
+      });
+      return result.data;
+    } catch (err) {
+      console.log(err);
+      return response.status(500).send("");
+    }
+  }
 }
 
 module.exports = TelegramController;

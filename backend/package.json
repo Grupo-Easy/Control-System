@@ -2,12 +2,12 @@
   "name": "adonis-api-app",
   "version": "4.1.0",
   "adonis-version": "4.1.0",
-  "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "node ace test",
-    "fake": "node ./tools/fake/Users.js"
+    "fake": "node ./tools/fake/Users.js",
+    "dev": "adonis serve --dev"
   },
   "keywords": [
     "adonisjs",
