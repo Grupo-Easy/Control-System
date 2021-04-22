@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Grid,
-  Flex,
-  Text,
-  Link,
-  Skeleton,
-  SkeletonText,
-} from "@chakra-ui/react";
+import { Box, Grid, Flex, Text, Link, Skeleton } from "@chakra-ui/react";
 import Auth from "../../components/Auth";
 import { motion } from "framer-motion";
+import Header from "../../components/Header";
 
 function Dashboard({ history }) {
   const [Data, setData] = useState({
@@ -21,7 +14,7 @@ function Dashboard({ history }) {
     updated_at: "",
   });
   const [RenderItens, setRenderItens] = useState([]);
-  const [Loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function Login() {
@@ -45,7 +38,9 @@ function Dashboard({ history }) {
       ]);
       setRenderItens(itens);
       setData(data);
+      // setTimeout(() => {
       setLoading(true);
+      // }, 1500);
     }
     Login();
   }, [history]);
@@ -53,34 +48,20 @@ function Dashboard({ history }) {
   return (
     <>
       <Box height="100vh" width="100vw">
-        <Box
-          boxShadow="base"
-          p="6"
-          bg="green.500"
-          maxHeight={["20vh", "10vh"]}
-          justifyContent="center"
-        >
-          <Text
-            fontWeight="bold"
-            fontSize={{ base: "2rem", sm: "2rem" }}
-            color="white"
-          >
-            Ferramentas
-          </Text>
-        </Box>
+        <Header title="Ferramentas" />
         <Flex m={16} h="100%" flexDirection="column" alignItems="center">
           <Flex
             m={2}
             w={["20rem", "22rem", "40rem", "84rem"]}
             justifyContent="flex-start"
           >
-            <Skeleton>
+            <Skeleton isLoaded={Loading} dela>
               <Text fontWeight="bold" fontSize="1.75rem" align="center">
-                {Data.name}
+                Olá {Data.name}
               </Text>
             </Skeleton>
           </Flex>
-          <Skeleton isLogged={false}>
+          <Skeleton isLoaded={Loading}>
             <Flex
               flexDirection="column"
               justifyContent="center"
