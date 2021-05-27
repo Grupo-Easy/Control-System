@@ -3,7 +3,6 @@ import { List } from "semantic-ui-react";
 import {
   Container,
   Header,
-  Title,
   Main,
   BoxSuccess,
   BoxContainerOfUsers,
@@ -16,6 +15,7 @@ import { BoxText } from "./style";
 import { BoxInput, BoxContainer } from "./style";
 import { ConfButton } from "./style";
 import { BoxSelect, ConfBoxForm, BoxError } from "./style";
+import { Text } from "@chakra-ui/react";
 
 export default function Dashboard({ history }) {
   const [userdata, setUser] = useState({});
@@ -146,10 +146,14 @@ export default function Dashboard({ history }) {
   return (
     <Container>
       <Header>
-        <Title>{userdata.name} - Admin</Title>
+        <Text fontSize="1.75rem" fontWeight="bold">
+          {userdata.name} - Admin
+        </Text>
       </Header>
       <Main>
-        <h2>Configurações</h2>
+        <Text fontSize="1.50rem" fontWeight="bold">
+          Configurações
+        </Text>
         <BoxContainer>
           <ConfBoxForm onSubmit={handleSubmitCategory}>
             <BoxText>Adicionar categoria</BoxText>
@@ -194,7 +198,8 @@ export default function Dashboard({ history }) {
               <option value="" disabled>
                 Selecione o tipo de acesso
               </option>
-              <option value="User">Usuario</option>
+              <option value="Gestion">Gestão</option>
+              <option value="Oficina">Oficina</option>
               <option value="Admin">Admin</option>
             </BoxSelect>
             <BoxInput
@@ -227,7 +232,10 @@ export default function Dashboard({ history }) {
               {Types.map((item) => (
                 <List.Item key={item.id}>
                   <List.Content>
-                    <List.Header href={`/dashboard/${item.name}`} as="a">
+                    <List.Header
+                      href={`/dashboard/gestion/${item.name}`}
+                      as="a"
+                    >
                       {item.name}
                     </List.Header>
                   </List.Content>

@@ -46,6 +46,7 @@ class AuthController {
       const jwt = await auth.attempt(email, password);
       return { token: jwt.token };
     } catch (err) {
+      console.error(err);
       return response.status(401).json({
         status: "Incorrect username or password",
       });

@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Header,
-  Title,
-  Main,
-  UploadBox,
-  UploadText,
-  UploadInput,
-  UploadSubmit,
-  ShowFiles,
-  UploadButton,
-  UploadSelect,
-} from "./style";
+import { Container, Header, Main, ShowFiles } from "./style";
 import api from "../../services/api";
 import { List } from "semantic-ui-react";
 import axios from "axios";
 import FileDownload from "js-file-download";
+import { Text } from "@chakra-ui/react";
 
 export default function Dashboard({ match }) {
   const id = match.params.type;
@@ -41,12 +30,9 @@ export default function Dashboard({ match }) {
       } catch (err) {}
     }
     GetData();
-  }, []);
+  }, [id]);
 
   const downloadFile = async (fileUrl, namefile) => {
-    // Get the file name
-
-    // The path of the downloaded file on our machine
     try {
       const response = await axios({
         method: "GET",
@@ -66,10 +52,14 @@ export default function Dashboard({ match }) {
   return (
     <Container>
       <Header>
-        <Title>{userdata.name} - Dashboard</Title>
+        <Text fontSize="2rem" fontWeight="bold">
+          {userdata.name} - Dashboard
+        </Text>
       </Header>
       <Main>
-        <h2>Arquivos</h2>
+        <Text fontSize="1.50rem" fontWeight="bold">
+          Arquivos
+        </Text>
         <ShowFiles>
           <List divided relaxed>
             {arg.map((item) => (
